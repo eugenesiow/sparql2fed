@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  // "defaultSchema": "_4UT01",
+  "schemas": [
+    {
+      "name": "_ALT",
+      "type":"custom",
+      "factory": "org.apache.calcite.adapter.jdbc.JdbcSchema$Factory",
+      "operand": {
+        "baseDirectory":"",
+        "jdbcDriver": "org.h2.Driver",
+        "jdbcUrl": "jdbc:h2:~/LSD_h2_databases_user/ALT",
+        "jdbcUser": "sa",
+        "jdbcPassword": ""
+      }
+    },
+    {
+      "name": "_AGPC1",
+      "type":"custom",
+      "factory": "org.apache.calcite.adapter.jdbc.JdbcSchema$Factory",
+      "operand": {
+        "baseDirectory":"",
+        "jdbcDriver": "org.h2.Driver",
+        "jdbcUrl": "jdbc:h2:~/LSD_h2_databases_user/AGPC1",
+        "jdbcUser": "sa",
+        "jdbcPassword": ""
+      }
+    }
+  ]
+}
