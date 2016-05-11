@@ -22,7 +22,7 @@ public class test {
 			
 			Statement statement = calciteConnection.createStatement();
 			ResultSet resultSet = statement.executeQuery(
-			    "SELECT AIRTEMPERATURE FROM _ALT._ALT UNION ALL SELECT AIRTEMPERATURE FROM _AGPC1._AGPC1");
+			    "SELECT AIRTEMPERATURE FROM _ALT._ALT");
 			ResultSetMetaData rsmd = resultSet.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
 			while (resultSet.next()) {

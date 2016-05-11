@@ -5,7 +5,7 @@
     {
       "name": "_ALT",
       "type":"custom",
-      "factory": "org.apache.calcite.adapter.jdbc.JdbcSchema$Factory",
+      "factory": "uk.ac.soton.ldanalytics.sparql2fed.S2SMLSchema$Factory",
       "operand": {
         "baseDirectory":"",
         "jdbcDriver": "org.h2.Driver",
@@ -17,7 +17,7 @@
     {
       "name": "_AGPC1",
       "type":"custom",
-      "factory": "org.apache.calcite.adapter.jdbc.JdbcSchema$Factory",
+      "factory": "uk.ac.soton.ldanalytics.sparql2fed.S2SMLSchema$Factory",
       "operand": {
         "baseDirectory":"",
         "jdbcDriver": "org.h2.Driver",
