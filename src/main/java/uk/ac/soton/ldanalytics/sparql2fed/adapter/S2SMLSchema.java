@@ -1,6 +1,8 @@
 package uk.ac.soton.ldanalytics.sparql2fed.adapter;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -11,6 +13,7 @@ import org.apache.calcite.schema.Schema;
 import org.apache.calcite.schema.SchemaFactory;
 import org.apache.calcite.schema.SchemaPlus;
 import org.apache.calcite.schema.Schemas;
+import org.apache.calcite.schema.Table;
 import org.apache.calcite.schema.impl.AbstractSchema;
 import org.apache.calcite.sql.SqlDialect;
 
@@ -21,26 +24,20 @@ public class S2SMLSchema extends AbstractSchema {
 //		super(dataSource, dialect, convention, catalog, schema);
 	}
 	
-//	public Set<String> getTableNames() {
-//	    // This method is called during a cache refresh. We can take it as a signal
-//	    // that we need to re-build our own cache.
-//		System.out.println("getnames");
-//		return new HashSet<String>();
-////	    return getTableMap(true).keySet();
-//	}
-//	
-//	public Table getTable(String name) {
-//		System.out.println("gettab");
-//		return null;
-////		return getTableMap(false).get(name);
-//	}
+	@Override 
+	protected Map<String, Table> getTableMap() {
+	    
+	    // Build a map from table name to table; each file becomes a table.
+	    final ImmutableMap.Builder<String, Table> builder = ImmutableMap.builder();
+//	    for (File file : files) {
+	      String tableName = "_ALT";
 	
-//	private synchronized ImmutableMap<String, JdbcTable> getTableMap(boolean force) {
-//		if (force || tableMap == null) {
-//    		tableMap = computeTables();
-//    	}
-//    	return tableMap;
-//	}
+	      final JdbcTable table =
+	              new JdbcTable(this, catalogName, schemaName, tableName, tableType);
+	      builder.put(tableName, table);
+//	    }
+	    return builder.build();
+	}
 
 	public static class Factory implements SchemaFactory {
 	    public Schema create(
@@ -63,6 +60,11 @@ public class S2SMLSchema extends AbstractSchema {
 	    final JdbcConvention convention =
 	        JdbcConvention.of(dialect, expression, name);
 	    return new S2SMLSchema(dataSource, dialect, convention, catalog, schema);
+	}
+
+	private static SqlDialect createDialect(DataSource dataSource) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public static Schema create(SchemaPlus parentSchema, String name,
