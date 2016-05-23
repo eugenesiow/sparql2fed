@@ -1,13 +1,10 @@
 package uk.ac.soton.ldanalytics.sparql2fed.adapter;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.sql.DataSource;
 
 import org.apache.calcite.adapter.jdbc.JdbcConvention;
-import org.apache.calcite.adapter.jdbc.JdbcSchema;
 import org.apache.calcite.linq4j.tree.Expression;
 import org.apache.calcite.schema.Schema;
 import org.apache.calcite.schema.SchemaFactory;
@@ -17,11 +14,22 @@ import org.apache.calcite.schema.Table;
 import org.apache.calcite.schema.impl.AbstractSchema;
 import org.apache.calcite.sql.SqlDialect;
 
-public class S2SMLSchema extends AbstractSchema {
+import com.google.common.collect.ImmutableMap;
 
+public class S2SMLSchema extends AbstractSchema {
+	final String catalog;
+	final String schema;
+	final DataSource dataSource;
+	final JdbcConvention convention;
+	public final SqlDialect dialect;
+	
 	public S2SMLSchema(DataSource dataSource, SqlDialect dialect,JdbcConvention convention, String catalog, String schema) {
 		super();
-//		super(dataSource, dialect, convention, catalog, schema);
+		this.dataSource = dataSource;
+		this.convention = convention;
+		this.dialect = dialect;
+		this.catalog = catalog;
+		this.schema = schema;
 	}
 	
 	@Override 
@@ -31,9 +39,11 @@ public class S2SMLSchema extends AbstractSchema {
 	    final ImmutableMap.Builder<String, Table> builder = ImmutableMap.builder();
 //	    for (File file : files) {
 	      String tableName = "_ALT";
-	
-	      final JdbcTable table =
-	              new JdbcTable(this, catalogName, schemaName, tableName, tableType);
+	      final String catalogName = "";
+	      final String schemaName = "";
+	      final TableType tableType = TableType.TABLE;
+	      final S2SMLTable table =
+	              new S2SMLTable(this, catalogName, schemaName, tableName, tableType);
 	      builder.put(tableName, table);
 //	    }
 	    return builder.build();
@@ -55,7 +65,7 @@ public class S2SMLSchema extends AbstractSchema {
 	    String catalog,
 	    String schema) {
 	    final Expression expression =
-	        Schemas.subSchemaExpression(parentSchema, name, JdbcSchema.class);
+	        Schemas.subSchemaExpression(parentSchema, name, S2SMLSchema.class);
 	    final SqlDialect dialect = createDialect(dataSource);
 	    final JdbcConvention convention =
 	        JdbcConvention.of(dialect, expression, name);
@@ -63,8 +73,7 @@ public class S2SMLSchema extends AbstractSchema {
 	}
 
 	private static SqlDialect createDialect(DataSource dataSource) {
-		// TODO Auto-generated method stub
-		return null;
+		return JdbcUtils.DialectPool.INSTANCE.get(dataSource);
 	}
 
 	public static Schema create(SchemaPlus parentSchema, String name,
@@ -91,7 +100,10 @@ public class S2SMLSchema extends AbstractSchema {
 	        parentSchema, name, dataSource, jdbcCatalog, jdbcSchema);
 	}
 	
-	
+	// Used by generated code.
+	public DataSource getDataSource() {
+		return dataSource;
+	}
 
 	/** Creates a JDBC data source with the given specification. */
 	public static DataSource dataSource(String url, String driverClassName,String username, String password) {
@@ -100,6 +112,6 @@ public class S2SMLSchema extends AbstractSchema {
 			System.setProperty("hsqldb.reconfig_logging", "false");
 		}
 		return JdbcUtils.DataSourcePool.INSTANCE.get(url, driverClassName, username,password);
-  }
+	}
 	
 }
