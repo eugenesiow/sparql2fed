@@ -16,6 +16,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/eugene/Downloads/apache-calcite-1.8.0-src/core/target/calcite-core-1.8.0.jar"/>
+	<classpathentry kind="lib" path="/Users/eugene/Documents/workspace/calcite/core/target/calcite-core-1.9.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="/Users/eugene/Documents/workspace/calcite/linq4j/target/calcite-linq4j-1.9.0-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
