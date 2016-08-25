@@ -15,14 +15,14 @@ public class test {
 			Class.forName("org.apache.calcite.jdbc.Driver");
 			Properties info = new Properties();
 			info.setProperty("lex", "JAVA");
-			info.setProperty("model", "model.json");
+			info.setProperty("model", "jmodel.json");
 			Connection connection = DriverManager.getConnection("jdbc:calcite:", info);
 			CalciteConnection calciteConnection =
 			    connection.unwrap(CalciteConnection.class);
 			
 			Statement statement = calciteConnection.createStatement();
 			ResultSet resultSet = statement.executeQuery(
-			    "SELECT * FROM _ALT._ALT");
+			    "select AVG(environment.INSIDETEMP) from _ALT.ENVIRONMENT environment GROUP BY EXTRACT(HOUR FROM environment.TIMESTAMPUTC)");
 			ResultSetMetaData rsmd = resultSet.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
 			while (resultSet.next()) {

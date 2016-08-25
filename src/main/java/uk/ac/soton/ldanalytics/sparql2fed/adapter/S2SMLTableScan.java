@@ -6,11 +6,11 @@ import java.util.List;
 import org.apache.calcite.adapter.jdbc.JdbcConvention;
 import org.apache.calcite.adapter.jdbc.JdbcImplementor;
 import org.apache.calcite.adapter.jdbc.JdbcRel;
-import org.apache.calcite.plan.RelOptCluster;
-import org.apache.calcite.plan.RelOptTable;
-import org.apache.calcite.plan.RelTraitSet;
-import org.apache.calcite.rel.RelNode;
-import org.apache.calcite.rel.core.TableScan;
+import uk.ac.soton.ldanalytics.sparql2fed.plan.RelOptCluster;
+import uk.ac.soton.ldanalytics.sparql2fed.plan.RelOptTable;
+import uk.ac.soton.ldanalytics.sparql2fed.plan.RelTraitSet;
+import uk.ac.soton.ldanalytics.sparql2fed.rel.RelNode;
+import uk.ac.soton.ldanalytics.sparql2fed.rel.core.TableScan;
 
 public class S2SMLTableScan extends TableScan implements JdbcRel {
 	  final S2SMLTable S2SMLTable;

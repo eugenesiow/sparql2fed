@@ -12,7 +12,7 @@ import org.apache.calcite.schema.SchemaPlus;
 import org.apache.calcite.schema.Schemas;
 import org.apache.calcite.schema.Table;
 import org.apache.calcite.schema.impl.AbstractSchema;
-import org.apache.calcite.sql.SqlDialect;
+import uk.ac.soton.ldanalytics.sparql2fed.sql.SqlDialect;
 
 import com.google.common.collect.ImmutableMap;
 
