@@ -5,7 +5,7 @@
     {
       "name": "_ALT",
       "type":"custom",
-      "factory": "uk.ac.soton.ldanalytics.sparql2fed.adapter.JdbcSchema$Factory",
+      "factory": "uk.ac.soton.ldanalytics.sparql2fed.adapter.jdbc.JdbcSchema$Factory",
       "operand": {
         "baseDirectory":"",
         "jdbcDriver": "org.h2.Driver",
